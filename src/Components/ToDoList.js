@@ -30,11 +30,31 @@ export default function ToDoList() {
     }
   };
 
+  /* SEND */
+
+  const toggleCompleted = async (id, currentValue) => {
+    try {
+      const newValue = currentValue ? 0 : 1;
+
+      const response = await axios.put(`http://localhost:5000/todos/${id}`, {
+        completed: newValue,
+      });
+
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id
+            ? { ...todo, completed: response.data.completed }
+            : todo
+        )
+      );
+    } catch (error) {
+      console.error("Problem while toggling completion", error);
+    }
+  };
+
   /* DELETE */
 
   const deleteTodo = async (id) => {
-    console.log("Deleting todo with id:", id);
-    console.log("Todos:", todos);
     try {
       await axios.delete(`http://localhost:5000/todos/${id}`);
       setTodos(todos.filter((todos) => todos.id !== id));
@@ -47,11 +67,17 @@ export default function ToDoList() {
     <div>
       ToDoList
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map((todo) => (
           <li key={todo.id}>
             |{todo.text}
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>|
-            Completed<input type="checkbox"></input>|
+            Completed
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleCompleted(todo.id, todo.completed)}
+            ></input>
+            |
           </li>
         ))}
       </ul>

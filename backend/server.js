@@ -55,10 +55,10 @@ app.get("/todos", (req, res) => {
 /* UPDATE */
 app.put("/todos/:id", (req, res) => {
   const { id } = req.params;
-  const { text, completed } = req.body;
-  const sql = `UPDATE todos SET text = ?, completed = ? WHERE id = ?`;
+  const { completed } = req.body;
+  const sql = `UPDATE todos SET completed = ? WHERE id = ?`;
 
-  db.query(sql, [id, text, completed], (err, result) => {
+  db.query(sql, [completed, id], (err, result) => {
     if (err) {
       res.status(500).send("Problem putting data");
       return;
@@ -67,7 +67,7 @@ app.put("/todos/:id", (req, res) => {
       res.status(404).send("Task couldn't be found!");
       return;
     }
-    res.json({ id, text, completed });
+    res.json({ id, completed });
   });
 });
 
