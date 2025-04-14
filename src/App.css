@@ -12,10 +12,10 @@ body {
 
 .App {
   background-color: #1f1f1f;
-  padding: 40px 30px;
+  padding: 10px 30px 20px 30px;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-  width: 380px;
+  width: 800px;
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -31,46 +31,61 @@ h1 {
   color: #bdf8ff;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-li {
+thead {
   background-color: #333;
-  margin-bottom: 12px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.3s ease;
 }
 
-li:hover {
-  background-color: #444;
+th,
+td {
+  padding: 5px 5px;
+  text-align: center;
+  border-bottom: 1px solid #444;
 }
 
-.textIn {
-  flex-grow: 1;
+tr {
+  background-color: #2b2b2b;
+  transition: background-color 0.3s ease;
+}
+
+tr:hover {
+  background-color: #3a3a3a;
+}
+
+th {
+  color: #bdf8ff;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: calc(100% - 130px);
   padding: 10px;
   border: none;
   border-radius: 8px;
   outline: none;
-  margin-right: 10px;
   background-color: #fff;
   color: #111;
   font-family: inherit;
   transition: box-shadow 0.2s ease;
+  margin-right: 10px;
 }
 
-.textIn:focus {
+input[type="text"]:focus {
   box-shadow: 0 0 8px #00bcd4;
 }
 
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
 button {
-  padding: 10px 16px;
+  padding: 8px 14px;
   background-color: #00bcd4;
   border: none;
   border-radius: 8px;

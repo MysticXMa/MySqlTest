@@ -71,6 +71,28 @@ app.put("/todos/:id", (req, res) => {
   });
 });
 
+/* DELETE MULTIPLE */
+app.put("/todos/:id", (req, res) => {
+  const { id } = req.params;
+  const { selected } = req.body;
+
+  const sql = `UPDATE todos SET selected = ? WHEsRE id = ?`;
+
+  console.log(req.body);
+
+  db.query(sql, [selected, id], (err, result) => {
+    if (err) {
+      res.status(500).send("Problem deleting multiple data");
+      return;
+    }
+    if (result.affectedRows === 0) {
+      res.status(404).send("Task couldn't be found!");
+      return;
+    }
+    res.json({ id, selected });
+  });
+});
+
 /* DELETE */
 app.delete("/todos/:id", (req, res) => {
   const { id } = req.params;
